@@ -60,3 +60,10 @@ button:hover {
 .animate-fade-in.delay-400 { animation-delay: 0.4s; }
 .animate-fade-in.delay-500 { animation-delay: 0.5s; }
 
+.swiper {
+  scroll-behavior: smooth;
+}
+
+.swiper-slide {
+  transition: transform 0.4s ease-in-out;
+}

@@ -142,22 +142,22 @@ const Home = () => {
       >
         {[
           {
-            href: "mailto:your.email@gmail.com",
+            href: "mailto:dev.anupamupadhyay@gmail.com",
             icon: <EnvelopeIcon className="h-6 w-6" />,
             title: "Email",
           },
           {
-            href: "https://linkedin.com/in/yourprofile",
+            href: "https://www.linkedin.com/in/anupam-upadhyay-504a1b208/",
             icon: <FaLinkedin className="h-6 w-6" />,
             title: "LinkedIn",
           },
           {
-            href: "https://github.com/yourusername",
+            href: "https://github.com/4nupam",
             icon: <FaGithub className="h-6 w-6" />,
             title: "GitHub",
           },
           {
-            href: "https://yourportfolio.com",
+            href: "https://www.linkedin.com/in/anupam-upadhyay-504a1b208/",
             icon: <FaGlobe className="h-6 w-6" />,
             title: "Portfolio",
           },

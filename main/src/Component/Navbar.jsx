@@ -14,7 +14,7 @@ import Skills from "./Skills";
 import Experience from "./Experience";
 import Contact from "./Contact";
 
-// ✅ Navigation data
+// Navigation data
 const navData = [
   { name: "Home", icon: HomeIcon, component: Home },
   { name: "Projects", icon: FolderIcon, component: Projects },
@@ -57,11 +57,11 @@ const Navbar = () => {
           animate={{ opacity: 0.5 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1 }}
-          className={`absolute inset-0 bg-gradient-to-br ${gradients[active]} blur-[120px]`}
+          className={`absolute inset-0 bg-linear-to-br ${gradients[active]} blur-[120px]`}
         />
       </AnimatePresence>
 
-      {/* 🧭 Floating Navigation Bar */}
+      {/*  Floating Navigation Bar */}
       <motion.nav
         initial={{ y: -40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
