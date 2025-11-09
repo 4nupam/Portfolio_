@@ -43,12 +43,7 @@ const Experience = () => {
             transition={{ type: "spring", stiffness: 180, damping: 18 }}
             className="relative w-full max-w-lg rounded-2xl bg-white p-6 shadow-xl overflow-y-auto max-h-[85vh]"
           >
-            <button
-              onClick={onClose}
-              className="absolute top-4 right-4 bg-gray-100 p-2 rounded-full hover:bg-gray-200"
-            >
-              ✕
-            </button>
+           
 
             {data.image && (
               <div className="flex justify-center mb-4">
@@ -72,15 +67,15 @@ const Experience = () => {
               {data.description}
             </p>
 
-            {data.link && (
+            {data.Link && (
               <div className="mt-6 text-center">
                 <a
-                  href={data.link}
+                  href={data.Link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition"
+                  className="inline-block cursor-pointer bg-black text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition"
                 >
-                  Visit Project
+                  Visit Company
                 </a>
               </div>
             )}
@@ -124,7 +119,7 @@ const Experience = () => {
   if (loading)
     return (
       <div className="flex h-64 items-center justify-center text-lg font-medium text-indigo-600">
-        Loading your experience...
+       Supabase is waking up...
       </div>
     );
 

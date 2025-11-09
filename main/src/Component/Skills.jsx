@@ -31,7 +31,12 @@ const Skills = () => {
     mouseX.set(x);
     mouseY.set(y);
   };
-
+if (loading)
+    return (
+      <div className="flex h-64 items-center justify-center text-lg font-medium text-indigo-600">
+     Supabase is waking up...
+      </div>
+    );
   return (
     <section
       onMouseMove={handleMouseMove}
