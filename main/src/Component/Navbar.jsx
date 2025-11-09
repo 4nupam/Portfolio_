@@ -23,7 +23,7 @@ const navData = [
   { name: "Contact", icon: EnvelopeIcon, component: Contact },
 ];
 
-// 🎨 Gradient background per section
+// 🎨 Gradient backgrounds
 const gradients = {
   Home: "from-indigo-500 via-purple-500 to-pink-500",
   Projects: "from-blue-500 via-cyan-500 to-green-400",
@@ -35,13 +35,11 @@ const gradients = {
 const Navbar = () => {
   const [active, setActive] = useState("Home");
 
-  // Load saved tab
   useEffect(() => {
     const savedTab = localStorage.getItem("activeTab");
     if (savedTab) setActive(savedTab);
   }, []);
 
-  // Handle tab click
   const handleTabClick = (name) => {
     setActive(name);
     localStorage.setItem("activeTab", name);
@@ -49,7 +47,7 @@ const Navbar = () => {
 
   return (
     <div className="relative flex flex-col h-screen overflow-hidden bg-gray-50 dark:bg-gray-900 transition-all duration-700 ease-in-out">
-      {/* 🔮 Smooth Dynamic Gradient Background */}
+      {/* 🌈 Gradient background */}
       <AnimatePresence mode="wait">
         <motion.div
           key={active}
@@ -61,43 +59,50 @@ const Navbar = () => {
         />
       </AnimatePresence>
 
-      {/*  Floating Navigation Bar */}
+      {/* 🔹 Navigation Bar */}
       <motion.nav
         initial={{ y: -40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className="fixed z-50 left-1/2 -translate-x-1/2 w-[92%] md:w-1/2 bottom-4 md:top-6 md:bottom-auto
-                   bg-white/80 dark:bg-gray-800/80 shadow-2xl rounded-full border border-gray-200 dark:border-gray-700 
-                   backdrop-blur-xl transition-all duration-500"
+        className={`fixed z-50 left-1/2 -translate-x-1/2 w-[95%] sm:w-[90%] md:w-2/3 lg:w-1/2 
+                    ${active === "Contact" ? "bottom-4" : "bottom-6"}
+                    md:top-6 md:bottom-auto
+                    bg-white/80 dark:bg-gray-800/80 shadow-2xl rounded-full border border-gray-200 dark:border-gray-700 
+                    backdrop-blur-xl transition-all duration-500`}
       >
-        <ul className="flex justify-around md:justify-center md:gap-6 py-3 px-4">
+        <ul className="flex justify-around md:justify-center md:gap-6 py-3 px-2 sm:px-4">
           {navData.map((item) => {
             const Icon = item.icon;
             const isActive = active === item.name;
+
             return (
               <motion.li
-                whileHover={{ scale: 1.08 }}
-                whileTap={{ scale: 0.96 }}
                 key={item.name}
                 onClick={() => handleTabClick(item.name)}
-                className={`group flex gap-2 items-center cursor-pointer px-3 py-2 rounded-full select-none
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.96 }}
+                className={`group flex items-center gap-1.5 sm:gap-2 cursor-pointer px-2 sm:px-3 py-2 rounded-full select-none
                             transition-all duration-300 ease-in-out ${
                               isActive
                                 ? "text-indigo-600 bg-indigo-100 dark:bg-indigo-900 dark:text-indigo-400 shadow-md shadow-indigo-200 dark:shadow-indigo-800/40"
                                 : "text-gray-500 dark:text-gray-400 hover:text-indigo-400"
                             }`}
               >
+                {/* Icon (hidden on xs screens) */}
                 <Icon
-                  className={`h-5 w-5 transition-transform duration-300 ${
+                  className={`h-5 w-5 transition-transform duration-300 hidden xs:inline ${
                     isActive ? "scale-110" : "scale-100"
                   }`}
                 />
+                {/* Label (visible on all, but responsive size) */}
                 <div className="flex flex-col items-start">
-                  <span className="text-xs font-medium">{item.name}</span>
+                  <span className="text-[10px] sm:text-xs font-medium">
+                    {item.name}
+                  </span>
                   {isActive && (
                     <motion.div
                       layoutId="activeIndicator"
-                      className="mt-1 h-1 w-8 bg-indigo-600 dark:bg-indigo-400 rounded-full"
+                      className="mt-1 h-1 w-6 sm:w-8 bg-indigo-600 dark:bg-indigo-400 rounded-full"
                     />
                   )}
                 </div>
@@ -107,8 +112,8 @@ const Navbar = () => {
         </ul>
       </motion.nav>
 
-      {/* 🎬 Animated Content Section */}
-      <main className=" flex items-center justify-center grow min-w-full h-full">
+      {/* 🧩 Animated Content */}
+      <main className="flex items-center justify-center grow min-w-full h-full">
         <AnimatePresence mode="wait">
           {navData.map((item) => {
             const Component = item.component;
@@ -123,7 +128,7 @@ const Navbar = () => {
                     duration: 0.6,
                     ease: [0.4, 0, 0.2, 1],
                   }}
-                  className=" w-full h-full flex items-center justify-center px-4 md:px-8"
+                  className="w-full h-full flex items-center justify-center px-3 sm:px-6 md:px-10"
                 >
                   <Component />
                 </motion.section>

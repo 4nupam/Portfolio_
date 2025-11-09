@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { supabase } from "../lib/supabaseClient";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import { motion, AnimatePresence } from "framer-motion";
 import "swiper/css";
-import "swiper/css/pagination";
 
 const Experience = () => {
   const [loading, setLoading] = useState(false);
   const [experience, setExperience] = useState([]);
-  const [selected, setSelected] = useState(null); // For popup
+  const [selected, setSelected] = useState(null); // Popup
 
   useEffect(() => {
     const fetchExper = async () => {
@@ -27,10 +26,9 @@ const Experience = () => {
     fetchExper();
   }, []);
 
-  // Popup Component
+  // 🔹 Popup
   const Popup = ({ data, onClose }) => {
     if (!data) return null;
-
     return (
       <AnimatePresence>
         <motion.div
@@ -48,7 +46,7 @@ const Experience = () => {
             transition={{ type: "spring", stiffness: 180, damping: 20 }}
             className="relative w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl overflow-y-auto max-h-[85vh]"
           >
-            {/* Close Button */}
+            {/* Close */}
             <button
               onClick={onClose}
               className="absolute top-4 right-4 rounded-full bg-slate-100 p-2 hover:bg-slate-200 transition"
@@ -69,7 +67,7 @@ const Experience = () => {
               </svg>
             </button>
 
-            {/* Image or Icon */}
+            {/* Image */}
             <div className="flex justify-center mb-4">
               {data.image ? (
                 <img
@@ -97,17 +95,15 @@ const Experience = () => {
               )}
             </div>
 
-            {/* Text Content */}
+            {/* Content */}
             <h3 className="text-lg font-semibold text-slate-900 text-center">
               {data.name}
             </h3>
-
             {data.Duration && (
               <p className="mt-1 text-xs text-slate-500 text-center">
                 {data.Duration}
               </p>
             )}
-
             <p className="mt-4 text-sm text-slate-700 leading-relaxed whitespace-pre-line">
               {data.description}
             </p>
@@ -130,19 +126,19 @@ const Experience = () => {
     );
   };
 
-  // Card Component
+  // 🔹 Card
   const Card = ({ id, name, Duration }) => (
     <motion.article
       key={id}
-      whileHover={{ scale: 1.03 }}
+      whileHover={{ scale: 1.04 }}
       whileTap={{ scale: 0.98 }}
       transition={{ type: "spring", stiffness: 150, damping: 15 }}
-      className="relative flex flex-col justify-between h-full w-full max-w-md rounded-2xl border border-gray-200 bg-white p-6 shadow-md hover:shadow-xl transition-all duration-300"
+      className="relative flex flex-col justify-between h-full w-full max-w-md rounded-2xl 
+                 border border-gray-200 bg-white/90 backdrop-blur-sm p-6 
+                 shadow-sm hover:shadow-lg transition-all duration-300 hover:border-indigo-200"
     >
       <div className="flex flex-col text-center">
-        <h3 className="text-lg font-semibold text-slate-900">
-          {id} — {name}
-        </h3>
+        <h3 className="text-lg font-semibold text-slate-900">{name}</h3>
         {Duration && (
           <p className="mt-1 text-xs text-slate-500 font-medium">{Duration}</p>
         )}
@@ -150,25 +146,27 @@ const Experience = () => {
 
       <button
         onClick={() => setSelected(experience.find((exp) => exp.id === id))}
-        className="mt-6 inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-xs font-medium text-white shadow-sm transition-all hover:bg-indigo-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300"
+        className="mt-6 inline-flex items-center justify-center rounded-md bg-indigo-600 px-4 py-2 
+                   text-xs font-medium text-white shadow-sm transition-all hover:bg-indigo-700 
+                   focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-300"
       >
-        View More
+        View Details
       </button>
     </motion.article>
   );
 
-  // Loading
+  // 🔹 Loader
   if (loading)
     return (
       <div className="flex h-64 items-center justify-center text-lg font-medium text-indigo-600">
-        Supabase is loading...
+        Loading your experience...
       </div>
     );
 
-  // Main Section
+  // 🔹 Main
   return (
     <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-      {/* Section Header */}
+      {/* Header */}
       <motion.header
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -179,9 +177,10 @@ const Experience = () => {
         <h2 className="text-2xl mt-3 font-bold tracking-tight text-slate-900 sm:text-4xl">
           Professional Experience
         </h2>
-        <p className="mt-3 text-slate-600 text-sm sm:text-base max-w-4xl mx-auto">
-          Software Engineer skilled in <strong>React, Node.js, and MongoDB</strong>,
-          with experience across <strong>web, desktop, and PWA applications</strong>.
+        <p className="mt-3 text-slate-600 text-sm sm:text-base max-w-3xl mx-auto">
+          Hands-on experience with{" "}
+          <strong>React, Node.js, Express, and MongoDB</strong>, delivering
+          <strong> scalable web, desktop, and PWA solutions</strong>.
         </p>
       </motion.header>
 
@@ -193,10 +192,9 @@ const Experience = () => {
       ) : (
         <>
           <Swiper
-            modules={[Autoplay, Pagination]}
+            modules={[Autoplay]}
             spaceBetween={24}
-            pagination={{ clickable: true }}
-            autoplay={{ delay: 3500, disableOnInteraction: false }}
+            autoplay={{ delay: 4000, disableOnInteraction: false }}
             loop={true}
             grabCursor={true}
             breakpoints={{
@@ -205,14 +203,11 @@ const Experience = () => {
               768: { slidesPerView: 2 },
               1024: { slidesPerView: 3 },
             }}
+            className="pb-10"
           >
             {experience.map((exp) => (
               <SwiperSlide key={exp.id} className="flex justify-center">
-                <Card
-                  id={exp.id}
-                  name={exp.name}
-                  Duration={exp.Duration}
-                />
+                <Card id={exp.id} name={exp.name} Duration={exp.Duration} />
               </SwiperSlide>
             ))}
           </Swiper>
