@@ -54,7 +54,7 @@ const Home = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text
+          className="text-4xl md:text-6xl font-extrabold text-black bg-clip-text
                      bg-linear-to-r from-indigo-600 via-purple-600 to-pink-600
                      dark:from-indigo-400 dark:via-purple-400 dark:to-pink-400"
         >
